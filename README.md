@@ -75,6 +75,13 @@ http://localhost:8000/
     Endpoint: POST /api/users/
     Поля: email, password, first_name, last_name, telegram_id, phone_number
     Пример ответа:
+    {
+    "email": "<email_address>",
+    "first_name": "Robert",
+    "last_name": "Mukushev",
+    "telegram_id": "<telegram_id>",
+    "phone_number": "<phone_number>"
+    }
 
 
 Создание уведомления
@@ -82,6 +89,16 @@ http://localhost:8000/
     Endpoint: POST /api/notifications/
     Автоматически запускается Celery задача process_notification.
     Пример ответа:
+    {
+    "id": 41,
+    "user": 1,
+    "message": "hi bob",
+    "status": "sent",
+    "retry_count": 0,
+    "last_channel": null,
+    "sent_at": null,
+    "created_at": "2025-11-19T08:29:22.896641Z"
+    }
 
 
 Получение уведомления
@@ -89,6 +106,16 @@ http://localhost:8000/
     Endpoint: GET /api/notifications/<id>/
     Возвращает детальную информацию о уведомлении.
     Пример ответа:
+    {
+    "id": 41,
+    "user": 1,
+    "message": "hi bob",
+    "status": "sent",
+    "retry_count": 0,
+    "last_channel": "telegram",
+    "sent_at": "2025-11-19T08:29:23.718116Z",
+    "created_at": "2025-11-19T08:29:22.896641Z"
+    }
 
 
 ## Конфигурация отправителей
