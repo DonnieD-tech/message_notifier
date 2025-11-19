@@ -70,11 +70,14 @@ http://localhost:8000/
 ## API
 
 
-Создание пользователя
+### Создание пользователя
 
-    Endpoint: POST /api/users/
-    Поля: email, password, first_name, last_name, telegram_id, phone_number
-    Пример ответа:
+#### Endpoint: POST /api/users/
+
+Поля: email, password, first_name, last_name, telegram_id, phone_number
+
+Пример ответа:
+
     {
     "email": "<email_address>",
     "first_name": "Robert",
@@ -84,11 +87,14 @@ http://localhost:8000/
     }
 
 
-Создание уведомления
+### Создание уведомления
 
-    Endpoint: POST /api/notifications/
-    Автоматически запускается Celery задача process_notification.
-    Пример ответа:
+#### Endpoint: POST /api/notifications/
+
+Автоматически запускается Celery задача process_notification.
+
+Пример ответа:
+
     {
     "id": 41,
     "user": 1,
@@ -101,11 +107,14 @@ http://localhost:8000/
     }
 
 
-Получение уведомления
+### Получение уведомления
 
-    Endpoint: GET /api/notifications/<id>/
-    Возвращает детальную информацию о уведомлении.
-    Пример ответа:
+#### Endpoint: GET /api/notifications/<id>/
+
+Возвращает детальную информацию о уведомлении.
+
+Пример ответа:
+
     {
     "id": 41,
     "user": 1,
@@ -130,7 +139,7 @@ SMSSender – отправка через SMS.ru.
 TelegramSender – отправка через Telegram Bot API.
 
 
-Порядок отправки можно настроить через константу CHANNEL_ORDER:
+### Порядок отправки можно настроить через константу CHANNEL_ORDER:
 
 CHANNEL_ORDER = ("sms", "email", "telegram")
 
