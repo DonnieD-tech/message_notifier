@@ -22,11 +22,13 @@
 ## Установка и настройка
 
 1. Клонируйте репозиторий:
+```bash
    git clone <URL_репозитория>
    cd notification_service
-
+```
    
-2. Создайте .env файл в корне проекта:
+3. Создайте .env файл в корне проекта:
+```bash
     # Django
     DEBUG=True
     SECRET_KEY=<ваш секретный ключ>
@@ -54,53 +56,80 @@
     # SMS.ru
     SMS_SENDER_NAME=Notifier
     SMS_RU_API_ID=<id из личного кабинета SMS.ru>
+```
 
-3. Постройте Docker-образ и запустите контейнеры:
-    docker-compose up --build
+4. Постройте Docker-образ и запустите контейнеры:
+```bash
+   docker-compose up --build
+```
 
 Далее интерфейс сервиса доступен в виде API-документации по адресу:
 http://localhost:8000/
 
-API
+
+## API
+
 
 Создание пользователя
+
     Endpoint: POST /api/users/
     Поля: email, password, first_name, last_name, telegram_id, phone_number
     Пример ответа:
 
+
 Создание уведомления
+
     Endpoint: POST /api/notifications/
     Автоматически запускается Celery задача process_notification.
     Пример ответа:
 
+
 Получение уведомления
+
     Endpoint: GET /api/notifications/<id>/
     Возвращает детальную информацию о уведомлении.
     Пример ответа:
 
 
-Конфигурация отправителей
+## Конфигурация отправителей
 
-Список доступных отправителей:
-    EmailSender – отправка через SMTP.
-    SMSSender – отправка через SMS.ru.
-    TelegramSender – отправка через Telegram Bot API.
+
+### Список доступных отправителей:
+
+EmailSender – отправка через SMTP.
+    
+SMSSender – отправка через SMS.ru.
+    
+TelegramSender – отправка через Telegram Bot API.
+
 
 Порядок отправки можно настроить через константу CHANNEL_ORDER:
-    CHANNEL_ORDER = ("sms", "email", "telegram")
 
-Максимальное количество попыток и задержка между ними:
-    MAX_RETRIES = 3
-    RETRY_DELAY_SECONDS = 60
+CHANNEL_ORDER = ("sms", "email", "telegram")
 
 
-Технологии
-    Python 3.12
-    Django 5.x
-    Django REST Framework
-    Celery + Redis (асинхронная обработка уведомлений)
-    PostgreSQL
-    Docker + Docker Compose
-    requests (для SMS и Telegram API)
-    smtplib (отправка Email через SMTP)
+### Максимальное количество попыток и задержка между ними:
+
+MAX_RETRIES = 3
+
+RETRY_DELAY_SECONDS = 60
+
+
+## Технологии
+
+Python 3.12
+
+Django 5.x
+
+Django REST Framework
+
+Celery + Redis (асинхронная обработка уведомлений)
+
+PostgreSQL
+
+Docker + Docker Compose
+
+requests (для SMS и Telegram API)
+
+smtplib (отправка Email через SMTP)
 
